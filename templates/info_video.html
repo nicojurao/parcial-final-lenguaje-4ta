@@ -144,7 +144,7 @@
         function descargar_mp3() {
             cargando.style.display = 'block';
 
-            fetch('http://localhost:5000/descargar-mp3?url={{ url }}')
+            fetch('http://localhost:5000/descargar_mp3?url={{ url }}')
                 .then(res => res.json())
                 .then(response => {
                     cargando.style.display = 'none';

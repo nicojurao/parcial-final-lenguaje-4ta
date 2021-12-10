@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, jsonify
+from flask import Flask, render_template, request,send_file
 import subprocess
 import youtube_dl
 import ffmpeg
@@ -200,8 +200,30 @@ def descarga_144p():
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(links)
-    
-###############################################################
 
+###############################################################
+@app.get('/descargar_mp3')
+def descarga_mp3():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestaudio',
+        'outtmpl': './static/' + titulo + ' audio' + '.mp3',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+
+    return send_file('./static/' + titulo + ' audio' + '.mp3', as_attachment=True)
+###############################################################
 
 app.run(debug=True)
