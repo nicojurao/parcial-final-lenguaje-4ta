@@ -31,11 +31,7 @@ def infoVideo():
 
         meta = ydl.extract_info(
         url, download=False) 
-        #titulo=(meta['title'])
-        #formatos=(meta['format'])
 
-        #(meta)
-        print(type(meta))
         
         videoId = url.replace('https://www.youtube.com/watch?v=', '')
         return render_template('info_video.html', videoId = videoId, url = url)
@@ -44,7 +40,7 @@ def infoVideo():
 ##########################################################################
 
 @app.get('/descargar_1080p')
-def descarga_1080():
+def descarga_1080p():
     url = request.args.get("url")
     formatos = request.args.get("formato")
     links = [url]
@@ -53,17 +49,153 @@ def descarga_1080():
         meta = ydl.extract_info(
         url, download=False) 
         titulo=(meta['title'])
-        print (formatos)
+
 
 
     ydl_opts = {
-        'format': '399+bestaudio',
+        'format': 'bestvideo[height<=1080]+bestaudio',
         'postprocessors':[{
                 'key': 'FFmpegMerger',
 
 
         }],
-        'outtmpl': './static/' + titulo + '.%(ext)s',
+        'outtmpl': './static/' + titulo + ' 1080p' + '.%(ext)s',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+    
+###############################################################
+
+@app.get('/descargar_720p')
+def descarga_720p():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestvideo[height<=720]+bestaudio',
+        'postprocessors':[{
+                'key': 'FFmpegMerger',
+
+
+        }],
+        'outtmpl': './static/' + titulo + ' 720p' + '.%(ext)s',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+    
+###############################################################
+@app.get('/descargar_480p')
+def descarga_480p():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestvideo[height<=480]+bestaudio',
+        'postprocessors':[{
+                'key': 'FFmpegMerger',
+
+
+        }],
+        'outtmpl': './static/' + titulo + ' 480p' + '.%(ext)s',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+    
+###############################################################
+@app.get('/descargar_360p')
+def descarga_360p():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestvideo[height<=360]+bestaudio',
+        'postprocessors':[{
+                'key': 'FFmpegMerger',
+
+
+        }],
+        'outtmpl': './static/' + titulo + ' 360p' + '.%(ext)s',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+    
+###############################################################
+@app.get('/descargar_240p')
+def descarga_240p():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestvideo[height<=240]+bestaudio',
+        'postprocessors':[{
+                'key': 'FFmpegMerger',
+
+
+        }],
+        'outtmpl': './static/' + titulo + ' 240p' + '.%(ext)s',
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download(links)
+    
+###############################################################
+@app.get('/descargar_144p')
+def descarga_144p():
+    url = request.args.get("url")
+    formatos = request.args.get("formato")
+    links = [url]
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        meta = ydl.extract_info(
+        url, download=False) 
+        titulo=(meta['title'])
+
+
+
+    ydl_opts = {
+        'format': 'bestvideo[height<=144]+bestaudio',
+        'postprocessors':[{
+                'key': 'FFmpegMerger',
+
+
+        }],
+        'outtmpl': './static/' + titulo + ' 144p' + '.%(ext)s',
     }
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:

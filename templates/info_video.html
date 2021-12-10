@@ -102,6 +102,19 @@
                     link.click();
                 })
         }
+        function descargar_360p() {
+            cargando.style.display = 'block';
+
+            fetch('http://localhost:5000/descargar_360p?url={{ url }}')
+                .then(res => res.json())
+                .then(response => {
+                    cargando.style.display = 'none';
+                    const link = document.createElement("a");
+                    link.download = 'video';
+                    link.href = response.url;
+                    link.click();
+                })
+        }
         function descargar_240p() {
             cargando.style.display = 'block';
 
